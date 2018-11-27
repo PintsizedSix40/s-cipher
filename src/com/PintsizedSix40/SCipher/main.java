@@ -42,14 +42,15 @@ public class main {
 			String[] bits2 = bits.clone();
 			int place = 0;
 			for(int x = 0; x < time; x++) {
-				if(place == bits2.length) {
+				if(place == bits2.length-1) {
 					place = 0;
 				}
+				System.out.println(place+"=="+bits2.length);
 				
-				String o =  bits2[x];
-				String t = bits2[x+1];
-				bits2[0] = t;
-				bits2[1] = o;
+				String o =  bits2[place];
+				String t = bits2[place+1];
+				bits2[place] = t;
+				bits2[place+1] = o;
 				place++;
 			
 		}
