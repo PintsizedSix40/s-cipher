@@ -2,4 +2,4 @@ This is just a test for a strange encoding method that came to me. It didn't rea
 
 BUGS:
 - Unable to decode.
-- Max time is 18.
+- Max time is two times your input excluding spaces (I'll fix this later).
