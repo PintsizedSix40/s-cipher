@@ -36,25 +36,33 @@ public class main {
 		for(int g = 0; g < chars.length; g++) {
 			hexs+=String.format("%04x", (int) chars[g]);
 		}
-		String[] bits = hexs.replace("0", "").split("");
+		//.replace("0", "")
+		String[] bits = hexs.split("");
 		
 		
 			String[] bits2 = bits.clone();
 			int place = 0;
+			//println(String.valueOf(bits2.length));
 			for(int x = 0; x < time; x++) {
-				if(place == bits2.length-1) {
+				//println(place+1+"=="+bits2.length);
+				if(place+1 == bits2.length) {
+					String o =  bits2[place];
+					String t = bits2[0];
+					bits2[place] = t;
+					bits2[0] = o;
 					place = 0;
-				}
-				System.out.println(place+"=="+bits2.length);
+				}else {
+				
 				
 				String o =  bits2[place];
 				String t = bits2[place+1];
 				bits2[place] = t;
 				bits2[place+1] = o;
 				place++;
+				}
 			
 		}
-			System.out.println(Arrays.toString(bits2));
+			
 			String str = "";
 			for(int t = 0; t < bits2.length; t++) {
 				str+=bits2[t];
