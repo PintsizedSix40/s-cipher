@@ -1,31 +1,17 @@
-package com.PintsizedSix40.SCipher;
+package com.PintsizedSix40.SCipher.Lib;
 
 public class main {
+	/*
+	 * public String cipher
+	 * params:
+	 * in-input unciphered string
+	 * time-times to shift/key
+	 * isChar-true if return is ASCII character, false if return is ASCII codes (may not convert to ASCII)
+	 * 
+	 * output-ciphered text (WARNING: CHECK IF CIPHERED TEXT IS THE SAME AS INPUT TEXT)
+	 */
 	
-	public static void println(Object in) {
-		System.out.println(in);
-	}
-	
-	public static void main(String args[]) {
-		if(args.length < 3) {
-			println("ERROR: Invalid Syntax. Please use the following syntax: 'encode/decode \"Input Text\" 5'");
-			System.exit(0);
-		}
-		if(args[args.length-3].equalsIgnoreCase("encode")) {
-			String ci = cipher(args[args.length-2], Integer.parseInt(args[args.length-1]));
-			if(ci.equalsIgnoreCase(args[args.length-2])) {
-				println("WARNING: PROVIDED KEY RESULTS IN SAME VALUE. PLEASE CHOOSE A NEW KEY!");
-				System.exit(0);
-			}
-		println(ci);
-		}else if(args[args.length-3].equalsIgnoreCase("decode")) {
-			println(decipher(args[args.length-2], Integer.parseInt(args[args.length-1])));
-		}else {
-			println("ERROR: Invalid Syntax. Please use the following syntax: 'encode/decode \"Input Text\" 5'");
-		}
-		}
-	
-	public static String cipher(String in, int time) {
+	public static String cipher(String in, int time, boolean isChar) {
 		char[] ca = in.toCharArray();
 		
 		String news = "";
@@ -41,17 +27,34 @@ public class main {
 			
 		}
 		String newss = "";
+		if(isChar) {
 		for(int y = 0; y < news.length()/3; y++) {
 			newss += (char) Integer.parseInt(news.substring(y*3, y*3+3));
 		}
+		}else {
+			newss = news;
+		}
 		return newss;
 	}
-		
-	public static String decipher(String in, int time) {
+	
+	/*
+	 * public String decipher
+	 * params:
+	 * in-input ciphered string
+	 * time-times to shift/key
+	 * isChar-true if input is ASCII characters, false if it is ASCII codes (use the same value you ciphered with)
+	 * 
+	 * output-unciphered text
+	 */
+	public static String decipher(String in, int time, boolean isChar) {
 		String news = "";
 		String actual = "";
+		if(isChar) {
 		for(int y = 0; y < in.length(); y++) {
 			actual+= String.format("%03d",(int) in.substring(y, y+1).toCharArray()[0]);
+		}
+		}else {
+			actual = in;
 		}
 		String[] arr = actual.split("(?<=\\G...)");
 		for(int i = 0; i < arr.length; i++) {
